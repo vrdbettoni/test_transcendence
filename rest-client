@@ -1,0 +1,36 @@
+GET http://localhost:3000/companies
+
+### create a company
+
+POST http://localhost:3000/companies
+Content-Type: application/json
+
+{
+	"name": "Facebook",
+	"domain": "www.facebook.com",
+	"description": "social Network App"
+}
+
+####
+
+POST http://localhost:3000/companies
+Content-Type: application/json
+
+{
+	"name": "Snap",
+	"domain": "www.snap.com",
+	"description": "social Network App"
+}
+
+### Find a company
+
+GET http://localhost:3000/companies/1
+
+### Update
+PUT http://localhost:3000/companies/4
+
+Content-Type: application/json
+{
+	"domain": "netflix.com",
+	"name": "netflix"
+}
