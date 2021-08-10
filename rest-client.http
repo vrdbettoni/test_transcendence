@@ -24,13 +24,17 @@ Content-Type: application/json
 
 ### Find a company
 
-GET http://localhost:3000/companies/1
+GET http://localhost:3000/companies/2
 
 ### Update
-PUT http://localhost:3000/companies/4
+PATCH http://localhost:3000/companies/1
 
 Content-Type: application/json
 {
 	"domain": "netflix.com",
 	"name": "netflix"
 }
+
+###
+
+GET http://localhost:3000/1

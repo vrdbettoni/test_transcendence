@@ -1,11 +1,13 @@
 #!/bin/bash
 set -e
 
-SERVER="test";
+SERVER="test-db";
 PW="root";
 DB="testdb";
+ID="";
+NAME="postgres";
 
-echo "echo stop & remove old docker [$SERVER] and starting new fresh instance of [$SERVER]"
+echo "Stop & remove old docker [$SERVER] and starting new fresh instance of [$SERVER] ..."
 (docker kill $SERVER || :) && \
   (docker rm $SERVER || :) && \
   docker run --name $SERVER -e POSTGRES_PASSWORD=$PW \
@@ -13,10 +15,20 @@ echo "echo stop & remove old docker [$SERVER] and starting new fresh instance of
   -p 5432:5432 \
   -d postgres
 
-# wait for pg to start
-echo "sleep wait for pg-server [$SERVER] to start";
-SLEEP 3;
+echo "Sleep wait for pg-server [$SERVER] to start...";
+while [ -z $ID ]
+do
+  SLEEP 1
+  ID=`docker ps -aqf "name=$SERVER"`
+done
 
-# create the db
 echo "CREATE DATABASE $DB ENCODING 'UTF-8';" | docker exec -i $SERVER psql -U postgres
 echo "\l" | docker exec -i $SERVER psql -U postgres
+
+OLDDATA=`ls ./postgres_data`
+if [ -n OLDDATA ]
+then
+  echo "Restore old data ..."
+  docker cp ./postgres_data/save.sql $SERVER:/save.sql
+  docker exec -i $SERVER psql -U $NAME -f save.sql
+fi
