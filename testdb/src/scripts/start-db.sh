@@ -25,9 +25,8 @@ done
 echo "CREATE DATABASE $DB ENCODING 'UTF-8';" | docker exec -i $SERVER psql -U postgres
 echo "\l" | docker exec -i $SERVER psql -U postgres
 
-OLDDATA=`ls ./postgres_data`
-if [ -n OLDDATA ]
-then
+OK=`ls ./postgres_data`
+if [ $OK == "save.sql" ]; then
   echo "Restore old data ..."
   docker cp ./postgres_data/save.sql $SERVER:/save.sql
   docker exec -i $SERVER psql -U $NAME -f save.sql

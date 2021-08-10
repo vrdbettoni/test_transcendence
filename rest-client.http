@@ -1,40 +1,25 @@
-GET http://localhost:3000/companies
+### GET ALL
+GET http://localhost:3000/players
 
-### create a company
+### GET ONE BY ID
+GET http://localhost:3000/players/1
 
-POST http://localhost:3000/companies
+### CREATE ONE
+POST http://localhost:3000/players
 Content-Type: application/json
 
 {
-	"name": "Facebook",
-	"domain": "www.facebook.com",
-	"description": "social Network App"
+	"name": "michel",
+	"password": "thebestone"
 }
 
-####
-
-POST http://localhost:3000/companies
+### UPDATE ONE
+PATCH http://localhost:3000/players/1
 Content-Type: application/json
 
 {
-	"name": "Snap",
-	"domain": "www.snap.com",
-	"description": "social Network App"
+	"name": "josé"
 }
 
-### Find a company
-
-GET http://localhost:3000/companies/2
-
-### Update
-PATCH http://localhost:3000/companies/1
-
-Content-Type: application/json
-{
-	"domain": "netflix.com",
-	"name": "netflix"
-}
-
-###
-
-GET http://localhost:3000/1
+### DELETE ONE
+DELETE http://localhost:3000/players/2

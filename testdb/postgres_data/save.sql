@@ -166,6 +166,42 @@ ALTER SEQUENCE public.companies_id_seq OWNED BY public.companies.id;
 
 
 --
+-- Name: player; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.player (
+    id integer NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now(),
+    name character varying NOT NULL,
+    password character varying NOT NULL
+);
+
+
+ALTER TABLE public.player OWNER TO postgres;
+
+--
+-- Name: player_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.player_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.player_id_seq OWNER TO postgres;
+
+--
+-- Name: player_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.player_id_seq OWNED BY public.player.id;
+
+
+--
 -- Name: companies id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -173,25 +209,25 @@ ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.co
 
 
 --
+-- Name: player id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.player ALTER COLUMN id SET DEFAULT nextval('public.player_id_seq'::regclass);
+
+
+--
 -- Data for Name: companies; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.companies (id, "createdAt", "updatedAt", name, domain, description) FROM stdin;
-1	2021-08-10 16:29:05.453577	2021-08-10 16:29:05.453577	Facebook	www.facebook.com	social Network App
-2	2021-08-10 16:29:06.790242	2021-08-10 16:29:06.790242	Snap	www.snap.com	social Network App
-3	2021-08-10 17:08:47.743594	2021-08-10 17:08:47.743594	Snap	www.snap.com	social Network App
-4	2021-08-10 17:08:47.895421	2021-08-10 17:08:47.895421	Snap	www.snap.com	social Network App
-5	2021-08-10 17:08:48.056965	2021-08-10 17:08:48.056965	Snap	www.snap.com	social Network App
-6	2021-08-10 17:08:48.216247	2021-08-10 17:08:48.216247	Snap	www.snap.com	social Network App
-7	2021-08-10 17:08:48.373187	2021-08-10 17:08:48.373187	Snap	www.snap.com	social Network App
-8	2021-08-10 17:12:55.374356	2021-08-10 17:12:55.374356	Snap	www.snap.com	social Network App
-9	2021-08-10 17:12:55.489074	2021-08-10 17:12:55.489074	Snap	www.snap.com	social Network App
-10	2021-08-10 17:12:55.6328	2021-08-10 17:12:55.6328	Snap	www.snap.com	social Network App
-11	2021-08-10 17:12:55.788279	2021-08-10 17:12:55.788279	Snap	www.snap.com	social Network App
-12	2021-08-10 17:12:55.932116	2021-08-10 17:12:55.932116	Snap	www.snap.com	social Network App
-13	2021-08-10 17:12:56.082346	2021-08-10 17:12:56.082346	Snap	www.snap.com	social Network App
-14	2021-08-10 17:12:56.242917	2021-08-10 17:12:56.242917	Snap	www.snap.com	social Network App
-15	2021-08-10 17:12:56.368266	2021-08-10 17:12:56.368266	Snap	www.snap.com	social Network App
+\.
+
+
+--
+-- Data for Name: player; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.player (id, "createdAt", name, password) FROM stdin;
 \.
 
 
@@ -199,7 +235,22 @@ COPY public.companies (id, "createdAt", "updatedAt", name, domain, description) 
 -- Name: companies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.companies_id_seq', 15, true);
+SELECT pg_catalog.setval('public.companies_id_seq', 1, false);
+
+
+--
+-- Name: player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.player_id_seq', 1, false);
+
+
+--
+-- Name: player PK_65edadc946a7faf4b638d5e8885; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.player
+    ADD CONSTRAINT "PK_65edadc946a7faf4b638d5e8885" PRIMARY KEY (id);
 
 
 --
