@@ -9,7 +9,7 @@ POST http://localhost:3000/players
 Content-Type: application/json
 
 {
-	"name": "michel",
+	"name": "paolo",
 	"password": "thebestone"
 }
 
